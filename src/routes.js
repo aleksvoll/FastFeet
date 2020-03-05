@@ -15,6 +15,9 @@ routes.use(auth);
 routes.post('/setRecipients', RecipientsController.store);
 routes.put('/updateRecipients', RecipientsController.update);
 routes.post('/deliveryMan', DeliveryController.store);
+routes.get('/deliveryMan', DeliveryController.index);
+routes.get('/deliveryMan/:id', DeliveryController.index);
+routes.put('/deliveryMan/:id', DeliveryController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

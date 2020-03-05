@@ -11,11 +11,12 @@ class Delivery extends Model {
         sequelize,
       }
     );
+    return this;
   }
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-    this.belongsTo(models.Users, { foreignKey: 'id', as: 'user' });
+    this.belongsTo(models.User, { foreignKey: 'updated_by' });
   }
 }
 

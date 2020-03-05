@@ -12,6 +12,7 @@ class Profiles extends Model {
         sequelize,
       }
     );
+    return this;
   }
 }
 

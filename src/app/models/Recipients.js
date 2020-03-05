@@ -10,12 +10,19 @@ class Recipients extends Model {
         state: Sequelize.STRING,
         city: Sequelize.STRING,
         zip_code: Sequelize.STRING,
-        updated_by: Sequelize.INTEGER,
       },
       {
         sequelize,
       }
     );
+    return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.User, {
+      foreignKey: 'updated_by',
+      as: 'updatedBy',
+    });
   }
 }
 

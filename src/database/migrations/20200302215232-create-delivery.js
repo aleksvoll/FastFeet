@@ -18,17 +18,27 @@ module.exports = {
       },
       avatar_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'files', key: 'id' },
+        references: {
+          model: {
+            tableName: 'files',
+          },
+          key: 'id',
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       updated_by: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: {
+          model: {
+            tableName: 'users',
+          },
+          key: 'id',
+        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

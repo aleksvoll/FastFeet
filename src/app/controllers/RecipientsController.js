@@ -10,7 +10,7 @@ class RecipientsController {
       state: Yup.string().required(),
       city: Yup.string().required(),
       zip_code: Yup.string().required(),
-      updated_by: Yup.string(),
+      updated_by: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -31,7 +31,7 @@ class RecipientsController {
       state: Yup.string(),
       city: Yup.string(),
       zip_code: Yup.string(),
-      updated_by: Yup.string(),
+      updated_by: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
