@@ -8,6 +8,11 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
+        {
+          description: 'Seller',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
       ],
       {}
     );

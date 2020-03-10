@@ -6,6 +6,7 @@ class Delivery extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
+        status: Sequelize.BOOLEAN,
       },
       {
         sequelize,

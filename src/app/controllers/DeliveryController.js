@@ -7,7 +7,7 @@ class DeliveryController {
     if (req.params.id) {
       const deliveryMan = await Delivery.findOne({
         where: { id: req.params.id },
-        attributes: ['id', 'name', 'email', 'avatar_id'],
+        attributes: ['id', 'name', 'email', 'avatar_id', 'status'],
         include: [
           {
             model: File,
@@ -20,7 +20,7 @@ class DeliveryController {
       return res.json(deliveryMan);
     }
     const deliveryMen = await Delivery.findAll({
-      attributes: ['id', 'name', 'email', 'avatar_id'],
+      attributes: ['id', 'name', 'email', 'avatar_id', 'status'],
       include: [
         {
           model: File,
@@ -92,14 +92,44 @@ class DeliveryController {
       }
     }
 
-    const { name, avatar_id, updated_by } = await delivery.update(req.body);
+    const { name, avatar_id, updated_by, status } = await delivery.update(
+      req.body
+    );
 
     return res.json({
       name,
       email,
       avatar_id,
       updated_by,
+      status,
     });
+  }
+
+  async delete(req, res) {
+    const delivery = await Delivery.findByPk(req.params.id, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+        },
+      ],
+    });
+
+    if (!delivery) {
+      return res.status(400).json({ error: 'Delivery Man not found.' });
+    }
+
+    if (!delivery.status) {
+      return res.status(400).json({
+        error: 'Delivery Man is already inactive',
+      });
+    }
+
+    delivery.status = false;
+
+    await delivery.save();
+
+    return res.json(delivery);
   }
 }
 
