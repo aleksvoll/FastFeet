@@ -23,6 +23,8 @@ routes.put('/deliveryMan/:id', DeliveryController.update);
 routes.delete('/deliveryMan/:id', DeliveryController.delete);
 
 routes.post('/newOrder', OrderController.store);
+routes.get('/getOrder', OrderController.index);
+routes.get('/getOrder/:id', OrderController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

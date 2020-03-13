@@ -1,13 +1,17 @@
 <strong>Olá, {{ deliveryMan }}</strong>
 <p>Existe uma nova entrega disponível para retirada, confira os detalhes abaixo:</p>
 <p>
-  <strong>Dados da entrega:</strong>
+  <strong>Dados da entrega:</strong><br /><br />
   <strong>Nome: </strong> {{recipientName}} <br />
   <strong>Endereço: </strong> {{recipientDirection}} <br />
   <strong>Complemento:</strong>{{recipientComplement}} <br />
   <strong>Estado:</strong>{{recipientState}} <br />
   <strong>Cidade:</strong>{{recipientCity}} <br />
-  <strong>CEP:</strong>{{recipientZipCode}} <br />
+  <strong>CEP:</strong>{{recipientZipCode}} <br /><br />
+  <strong>Dados do produto:</strong><br /><br />
+  <strong>O que você estará carregando: </strong> {{productName}} <br />
+  <strong>O que você precisa saber sobre o produto: </strong> {{productDescription}} <br />
+  <strong>Remetente:</strong>{{sender}} ({{senderEmail}}) <br />
 
   <br />
   <small>
