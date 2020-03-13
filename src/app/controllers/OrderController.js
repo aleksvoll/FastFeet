@@ -156,6 +156,52 @@ class OrderController {
 
     return res.json(newOrder);
   }
+
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      orderId: Yup.string().required(),
+      recipient_id: Yup.string(),
+      deliveryman_id: Yup.string(),
+      product_id: Yup.string(),
+      signature_id: Yup.string(),
+      updated_by: Yup.string(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({
+        error: 'Form validation fails. Please check fields and try again',
+      });
+    }
+
+    const { id } = req.params ? req.params : req.body;
+    const { email } = req.body;
+
+    const delivery = await Delivery.findByPk(id);
+
+    if (!delivery) {
+      return res.status(400).json({ error: 'Delivery Man not found.' });
+    }
+
+    if (email && email !== delivery.email) {
+      const deliveryExists = await Delivery.findOne({ where: { email } });
+
+      if (deliveryExists) {
+        return res.status(400).json({ error: 'Email already exists' });
+      }
+    }
+
+    const { name, avatar_id, updated_by, status } = await delivery.update(
+      req.body
+    );
+
+    return res.json({
+      name,
+      email,
+      avatar_id,
+      updated_by,
+      status,
+    });
+  }
 }
 
 export default new OrderController();
